@@ -1,0 +1,453 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Title of the library", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+IntroText = PirateHubUPDATE OP
+
+
+local Tab = Window:MakeTab({
+	Name = "TROLL V5.0",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Use as 2 hubs TROLLS"
+})
+
+Tab:AddButton({
+	Name = "TrollPIRATE V1",
+	Callback = function()
+      		loadstring(game:HttpGet('https://raw.githubusercontent.com/Shx121/PirateTrollV.10/refs/heads/main/obfuscated-2.lua'))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "TrollPIRATE V2",
+	Callback = function()
+      		loadstring(game:HttpGet('https://raw.githubusercontent.com/Shx121/PirateHubTROLL.V2/refs/heads/main/obfuscated-3.lua'))()
+  	end    
+})
+
+local Tab = Window:MakeTab({
+	Name = "HUBS",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "no autofling usa o sofá"
+})
+
+Tab:AddButton({
+	Name = "AutoFling",
+	Callback = function()
+      		loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Auto%20Fling%20Player'))()
+  	end    
+})
+
+HomeTab:AddButton({
+    Name = "Redz Hub",
+    Description = "Prints Hello!",
+    Callback = function()
+        loadstring(game:HttpGet("https://scriptblox.com/raw/Brookhaven-RP-RedZHub-9326"))()
+        print('Hello!')
+    end
+})
+
+-- Adicione o botão "Spin FLING GUI" à guia
+HomeTab:AddButton({
+    Name = "Spin FLING GUI",
+    Description = "Executa o código para girar a FLING GUI",
+    Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/r97d7dS0', true))()
+    end
+})
+
+-- Adicione o botão "System Broken" à seção "Home"
+HomeTab:AddButton({
+    Name = "System Broken",
+    Description = "Executa o código para quebrar o sistema",
+    Callback = function()
+        loadstring(game:HttpGet("https://scriptblox.com/raw/Ragdoll-Engine-BEST-SCRIPT-WORKING-SystemBroken-7544"))()
+    end
+})
+
+-- Ghost Hub Button Function
+local function loadGhostHub()
+    loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-X-Ghost-Hub-X-7595"))()
+end
+
+-- Add the Ghost Hub button to the existing HomeTab
+HomeTab:AddButton({
+    Name = "Ghost Hub",
+    Description = "Executes the Ghost Hub script",
+    Callback = function()
+        loadGhostHub()
+    end
+})
+
+-- Criar a aba "Flings"
+local FlingsTab = Window:MakeTab({
+    Name = "Flings [NEW]",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+-- Criar a seção "Seção Troll Beta" na aba "Flings"
+local FlingsSection = FlingsTab:AddSection({
+    Name = "Seção Troll Beta"
+})
+
+-- Função para realizar o "Fling Avançado" com o item 'Couch'
+local selectedKillAdvancedPlayer = nil
+local couchEquipped = false
+
+local function killAdvancedPlayer()
+    if selectedKillAdvancedPlayer then
+        local player = game.Players:FindFirstChild(selectedKillAdvancedPlayer)
+        if player then
+            -- Equipa o item 'Couch' no inventário se ainda não estiver equipado
+            local backpack = game.Players.LocalPlayer.Backpack
+            if backpack and not couchEquipped then
+                local couch = backpack:FindFirstChild("Couch")
+                if couch then
+                    game.Players.LocalPlayer.Character.Humanoid:EquipTool(couch)
+                    couchEquipped = true
+                else
+                    print("O item 'Couch' não foi encontrado no seu inventário.")
+                end
+            end
+            
+            -- Looping de teleportes no jogador selecionado da lista
+            while true do
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame
+                wait(0.0) -- Intervalo entre cada teleporte, ajuste conforme necessário
+                
+                -- Verifica se o jogador sentou no 'Couch' e realiza o teleporte para o céu
+                if player.Character:FindFirstChild("Humanoid") and player.Character.Humanoid.SeatPart then
+                    player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 0, 0) -- Teleporta para cima
+                    wait(0.0) -- Espera um pouco antes de teleportar de volta para evitar bugs
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(55931, 12551, 18083) -- Teleporta de volta para a posição original
+                    break -- Sai do loop após teleportar de volta
+                end
+            end
+            
+            -- Remove o item 'Couch' da mão do jogador após o teleporte para o céu
+            if couchEquipped then
+                local backpack = game.Players.LocalPlayer.Backpack
+                if backpack then
+                    local couch = backpack:FindFirstChild("Couch")
+                    if couch then
+                        couch.Parent = nil -- Remove o 'Couch' do inventário
+                        couchEquipped = false
+                    end
+                end
+            end
+        else
+            print("Jogador não encontrado.")
+        end
+    else
+        print("Nenhum jogador selecionado para o Bring Avançado.")
+    end
+end
+
+-- Adicionar um botão "Fling [BETA]" à seção "Seção Troll Beta"
+FlingsSection:AddButton({
+    Name = "Fling [Bug Fixed]",
+    Description = "Equipa o item 'Couch' e teleporta o jogador selecionado.",
+    Callback = function()
+        killAdvancedPlayer()
+    end
+})
+
+-- Adicionar uma lista de seleção de jogadores para "Fling "
+local killAdvancedPlayerList = {}
+for _, player in ipairs(game.Players:GetPlayers()) do
+    table.insert(killAdvancedPlayerList, player.Name)
+end
+
+FlingsSection:AddDropdown({
+    Name = "Selecione o Jogador para Fling BETA",
+    Description = "Selecione o jogador alvo para o Fling [BETA]",
+    Options = killAdvancedPlayerList,
+    Callback = function(playerName)
+        selectedKillAdvancedPlayer = playerName
+    end
+})
+
+-- Bring All Button Function
+local isBringAllEnabled = false
+
+local function toggleBringAll()
+    isBringAllEnabled = not isBringAllEnabled
+    if isBringAllEnabled then
+        print("Bring all activated!")
+        for i = 1, 10 do
+            for _, player in ipairs(game.Players:GetPlayers()) do
+                local character = game.Players.LocalPlayer.Character
+                if character and character:FindFirstChild("HumanoidRootPart") then
+                    character:FindFirstChild("HumanoidRootPart").CFrame = player.Character.HumanoidRootPart.CFrame
+                    wait(0.0)
+                end
+            end
+        end
+        print("Bring all completed!")
+        isBringAllEnabled = false
+    else
+        print("Bring all deactivated!")
+    end
+end
+
+-- Add the "Bring All" button to the Flings section
+FlingsSection:AddButton({
+    Name = "Bring All [SENDO PROGRAMADO]",
+    Description = "Teleport to all players 10 times",
+    Callback = function()
+        toggleBringAll()
+    end
+})
+
+-- Add buttons to the Flings tab
+FlingsTab:AddButton({
+    Name = "Get Sofa Beta",
+    Description = "It's in beta, there are still some bugs",
+    Callback = function()
+        local args = {
+            [1] = "PickingTools",
+            [2] = "Couch"
+        }
+        game:GetService("ReplicatedStorage").RE:FindFirstChild("1Too1l"):InvokeServer(unpack(args))
+        print('Hello!')
+    end
+})
+
+-- Kill Player Button Function
+local selectedKillPlayer = nil
+
+local function killPlayer()
+    if selectedKillPlayer then
+        local player = nil
+        -- Verificar se o nome completo do jogador foi inserido
+        if game.Players:FindFirstChild(selectedKillPlayer) then
+            player = game.Players:FindFirstChild(selectedKillPlayer)
+        else
+            -- Se não, procurar pelos jogadores que têm as iniciais do nome inseridas
+            for _,plr in ipairs(game.Players:GetPlayers()) do
+                if string.sub(plr.Name, 1, #selectedKillPlayer) == selectedKillPlayer then
+                    player = plr
+                    break
+                end
+            end
+        end
+        
+        if player then
+            for i = 0, 10 do
+                local character = game.Players.LocalPlayer.Character
+                if character and character:FindFirstChild("HumanoidRootPart") then
+                    character:FindFirstChild("HumanoidRootPart").CFrame = player.Character.HumanoidRootPart.CFrame
+                end
+                wait(0.0)
+            end
+            local character = game.Players.LocalPlayer.Character
+            if character then
+                local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+                if humanoidRootPart then
+                    humanoidRootPart.CFrame = CFrame.new(0, 99999999999999999999, 0)
+                    print("Player teleported to 9999999 meters above!")
+                end
+            end
+            
+            -- Wait for 5 seconds after kill and teleport to Agency Base 1 five times
+            wait(5)
+            for i = 1, 5 do
+                teleportToAgencyBase1()
+                wait(1) -- Wait for 1 second between each teleport
+            end
+        else
+            print("Player not found.")
+        end
+    else
+        print("No player selected to kill.")
+    end
+end
+
+-- Add the modified Kill Player button to the Flings tab with a textbox for player name input
+FlingsTab:AddButton({
+    Name = "Kill Player",
+    Description = "Kills the entered player and teleports you to Agency Base 1 after 5 seconds",
+    Callback = function()
+        killPlayer()
+    end
+})
+
+-- Add a textbox for entering the player's name
+FlingsTab:AddTextbox({
+    Name = "Enter Player Name",
+    Description = "Enter the name or initials of the player you want to kill",
+    Default = "",
+    Callback = function(playerName)
+        selectedKillPlayer = playerName
+    end
+})
+
+-- Função para executar a ação de alerta com a arma
+local function alarmGun()
+    -- Puxa o item Sniper
+    local args = {
+        [1] = "PickingTools",
+        [2] = "Sniper"
+    }
+    game:GetService("ReplicatedStorage").RE:FindFirstChild("1Too1l"):InvokeServer(unpack(args))
+
+    -- Equipa o item Sniper
+    local backpack = game.Players.LocalPlayer.Backpack
+    local character = game.Players.LocalPlayer.Character
+
+    local sniper = backpack:FindFirstChild("Sniper") or character:FindFirstChild("Sniper")
+
+    if sniper then
+        -- Se o item for encontrado, equipá-lo
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(sniper)
+
+        -- Teleportar o jogador para as coordenadas especificadas
+        character.HumanoidRootPart.CFrame = CFrame.new(315, 5, 42)
+
+        print("AlarmGun equipado e jogador teleportado!")
+    else
+        -- Se o item não for encontrado, exibir uma mensagem de erro
+        print("Sniper não encontrado no inventário ou personagem.")
+    end
+end
+
+-- Adicionar o botão "AlarmGun" à seção "Flings"
+FlingsTab:AddButton({
+    Name = "AlarmGun",
+    Description = "Equipa a Sniper e teleporta para a coordenada 315, 5, 42",
+    Callback = function()
+        alarmGun()
+    end
+})
+
+-- Variável para controlar se o Spin Fling V2 está ativado
+local spinFlingV2Enabled = false
+
+-- Função para girar o personagem em torno de um eixo específico
+local function rotateCharacter(axis, speed)
+    local character = game.Players.LocalPlayer.Character
+    if character and character:FindFirstChild("HumanoidRootPart") then
+        local hrp = character.HumanoidRootPart
+        if axis == "X" then
+            hrp.CFrame = hrp.CFrame * CFrame.Angles(speed, 99999, 99999)
+        elseif axis == "Y" then
+            hrp.CFrame = hrp.CFrame * CFrame.Angles(99999, speed, 99999)
+        elseif axis == "Z" then
+            hrp.CFrame = hrp.CFrame * CFrame.Angles(99999, 99999, speed)
+        end
+    end
+end
+
+-- Função para iniciar ou parar o Spin Fling V2 baseado no toggle
+local function toggleSpinFlingV2(enabled)
+    if enabled then
+        -- Inicia o loop para girar rapidamente o personagem em todos os ângulos
+        spinLoop = game:GetService("RunService").Stepped:Connect(function()
+            rotateCharacter("X", 9999999999)
+            rotateCharacter("Y", 9999999999)
+            rotateCharacter("Z", 9999999999)
+        end)
+        print("Spin Fling V2 ativado.")
+    else
+        -- Para o loop do Spin Fling V2
+        if spinLoop then
+            spinLoop:Disconnect()
+            spinLoop = nil
+        end
+        print("Spin Fling V2 desativado.")
+    end
+end
+
+-- Adicionar o Toggle Button para Spin Fling V2
+FlingsSection:AddToggle({
+    Name = "Spin Fling V2 [COMBO FLING]",
+    Description = "Ativa ou desativa o giro intenso em todos os ângulos do personagem",
+    Default = false,
+    Callback = function(enabled)
+        toggleSpinFlingV2(enabled)
+    end
+})
+
+-- Exibir uma notificação para o usuário
+OrionLib:MakeNotification({
+    Name = "notificação: Shnmaxhub",
+    Content = "Hello Welcome Shnmaxhub! New Update By: Shelby Testar Hub: Noel_a21s New Interface Hub",
+    Image = "rbxassetid://17326583943",
+    Time = 10
+})
+
+-- Variável para controlar se a função de proteção contra o void está ativada
+local voidProtectionEnabled = false
+
+-- Função para verificar se o jogador está próximo do void e teleportá-lo para cima
+local function checkAndTeleport()
+    -- Verificar se a função de proteção está ativada
+    if voidProtectionEnabled then
+        local character = game.Players.LocalPlayer.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            local humanoidRootPart = character.HumanoidRootPart
+            local yPos = humanoidRootPart.Position.Y
+
+            -- Verificar se o jogador está perto do void (você pode ajustar a posição conforme necessário)
+            if yPos <= 0 then
+                -- Teleportar o jogador para cima a 1000 metros
+                humanoidRootPart.CFrame = CFrame.new(humanoidRootPart.Position.X, 1000, humanoidRootPart.Position.Z)
+            end
+        end
+    end
+end
+
+-- Adicionar a seção "Void Protection" à guia "Flings"
+local voidProtectionSection = FlingsTab:AddSection({
+    Name = "Void Protection"
+})
+
+-- Adicionar o toggle para ativar ou desativar a função de proteção contra o void
+voidProtectionSection:AddToggle({
+    Name = "Void Protection",
+    Description = "Ativa ou desativa a proteção contra o void",
+    Default = false,
+    Callback = function(enabled)
+        voidProtectionEnabled = enabled
+        if voidProtectionEnabled then
+            print("Proteção contra o void ativada.")
+            -- Conecte a função `checkAndTeleport` ao evento `Heartbeat` para executar em intervalos rápidos
+            game:GetService("RunService").Heartbeat:Connect(checkAndTeleport)
+        else
+            print("Proteção contra o void desativada.")
+            -- A proteção contra o void está desativada; a função `checkAndTeleport` não será executada
+        end
+    end
+})
+
+-- Adiciona o botão "Stay Small" à seção "Flings"
+FlingsSection:AddButton({
+    Name = "Ficar Super Pequeno",
+    Description = "Diminuir o tamanho do personagem",
+    Callback = function()
+        -- Cria os argumentos para diminuir o tamanho do personagem
+        local args = {
+            [1] = "CharacterSizeDown",
+            [2] = 4
+        }
+        -- Envia um pedido ao servidor para diminuir o tamanho do personagem
+        game:GetService("ReplicatedStorage").RE:FindFirstChild("1Clothe1s"):FireServer(unpack(args))
+    end
+})
+
+FlingsTab:AddButton({
+    Name = "TemplasHUB",
+    Description = "",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/TemplariosScriptS2/TemplariosHubUpdatedVersion3/refs/heads/main/TemplariosHubUpdatedVersion3.txt"))()
+})
+
+OrionLib:Init()
